@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" task 1
+""" task 1 Module
 """
 
 
@@ -7,16 +7,21 @@ from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    """ Cache System based on FIFO algorithm
+    """
+    class FIFOCaching for caching system
+    based on the algoeithm FIFO
+    store data and get data
     """
     def __init__(self):
-        """ initialize cache dict and list to keep traking order
+        """
+        initialize cache dict and list to keep traking order
         """
         super().__init__()
         self.order_list = []
 
     def put(self, key, item):
-        """ store data in cache,
+        """
+        store data in cache,
         evict first-in item if the cache reach the maximum limit
         """
         if key is not None and item is not None:
@@ -29,7 +34,8 @@ class FIFOCache(BaseCaching):
                 print(f"Discard: {first_in}")
 
     def get(self, key):
-        """ return the value linked to the given key in
+        """
+        return the value linked to the given key in
         the cache_data
         """
         return self.cache_data.get(key, None)
