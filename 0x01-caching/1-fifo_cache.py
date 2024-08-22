@@ -1,45 +1,40 @@
 #!/usr/bin/env python3
-""" task 1 Module
+""" BaseCaching module
 """
-
-
 from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
     """
-    class FIFOCaching for caching system
-    based on the algoeithm FIFO
-    store data and get data
+    FIFOCache defines a FIFO caching system
     """
+
     def __init__(self):
         """
-        initialize cache dict and list to keep traking order
+        Initialize the class with the parent's init method
         """
         super().__init__()
-        self.order_list = []
+        self.order = []
 
     def put(self, key, item):
         """
-        store data in cache,
-        evict first-in item if the cache reach the maximum limit
+        Cache a key-value pair
         """
-        if key is not None and item is not None:
-            if key not in self.cache_data:
-                self.order_list.append(key)
-            self.order_list.remove(key)
-            self.order_list.append(key)
+        if key is None or item is None:
+            pass
+        else:
+            length = len(self.cache_data)
+            if length >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+                print("DISCARD: {}".format(self.order[0]))
+                del self.cache_data[self.order[0]]
+                del self.order[0]
+            self.order.append(key)
             self.cache_data[key] = item
-            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                first_in = self.order_list.pop(0)
-                del self.cache_data[first_in]
-                print(f"Discard: {first_in}")
 
     def get(self, key):
         """
-        return the value linked to the given key in
-        the cache_data
+        Return the value linked to a given key, or None
         """
-        if key is None or key not in self.cache_data:
-            return None
-        return self.cache_data.get(key, None)
+        if key is not None and key in self.cache_data.keys():
+            return self.cache_data[key]
+        return None

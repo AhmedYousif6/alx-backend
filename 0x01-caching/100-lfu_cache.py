@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" task 5
+""" task 5 module
 """
 
 
@@ -7,7 +7,10 @@ from base_caching import BaseCaching
 
 
 class LFUCache(BaseCaching):
-    """ cache system based on LFU algorithm
+    """
+    cache system based on LFU algorithm
+    with two methods to store
+    and get data from the cache system
     """
 
     def __init__(self):
@@ -20,7 +23,11 @@ class LFUCache(BaseCaching):
         self.usage_order = []
 
     def put(self, key, item):
-        """ store data in the cache system
+        """
+        method to store data in
+        the cache system and
+        return the evicted key
+        if the cache is full
         """
         if key is None or item is None:
             return
@@ -45,7 +52,13 @@ class LFUCache(BaseCaching):
             print(f"DISCARD: {lfu_key}")
 
     def get(self, key):
-        """ get the value with given key
+        """
+        method to retrive data with a given key,
+        param:
+            key: to get the value linked to the key
+        Return:
+            None if the key is none or not excist,
+            or the value linked to the key.
         """
         if key is None or key not in self.cache_data:
             return None

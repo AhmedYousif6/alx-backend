@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" task 4
+""" task 4 module
 """
 
 
@@ -7,7 +7,10 @@ from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
-    """ cache system based on MRU algorithm
+    """
+    cache system based on MRU algorithm
+    with two methods to store
+    and get data from the cache
     """
     def __init__(self):
         """ initialize
@@ -16,7 +19,10 @@ class MRUCache(BaseCaching):
         self.order = []
 
     def put(self, key, item):
-        """ store data to cache system
+        """
+        method to store data in the
+        cache system and return evicted
+        key if the cache need to make a room
         """
         if key is None or item is None:
             return
@@ -30,7 +36,10 @@ class MRUCache(BaseCaching):
             print(f"Discard: {mru}")
 
     def get(self, key):
-        """ get the value by given key
+        """
+        method to get the value
+        from the cache system with 
+        a given key
         """
         if key is None or key not in self.cache_data:
             return None

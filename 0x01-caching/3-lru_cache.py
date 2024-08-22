@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" task 3
+""" task 3 module
 """
 
 
@@ -8,15 +8,22 @@ from base_caching import BaseCaching
 
 class LRUCache(BaseCaching):
     """ cache system based on LRU algorithm
+    with two methods to store
+    and retrive data from the cache
     """
     def __init__(self):
-        """ initialize
+        """
+        initialize the parent class,
+        and order list to track the order
         """
         super().__init__()
         self.order = []
 
     def put(self, key, item):
-        """ store data
+        """ method to store data
+        'item' and link it to a key
+        the given 'key' param
+        and return the evicted key if it full
         """
         if key is None or item is None:
             return
@@ -32,7 +39,9 @@ class LRUCache(BaseCaching):
             print(f"Discard: {lru}")
 
     def get(self, key):
-        """ get the value with given key
+        """
+        method to retrive data
+        value with a given key
         """
         if key is None or key not in self.cache_data:
             return None
