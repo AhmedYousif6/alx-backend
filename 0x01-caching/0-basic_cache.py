@@ -1,21 +1,31 @@
 #!/usr/bin/env python3
-""" task 0
+""" BasicCache Module
 """
 
 from base_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
-    """ caching system to put and get data
+    """
+    Defines a class for caching information in key-value pairs
+    Methods:
+        put(key, item) - store a key-value pair
+        get(key) - retrieve the value associated with a key
     """
     def put(self, key, item):
-        """ store data to cache
+        """
+        Store a key-value pair
+        Args:
+            Key
+            Item
         """
         if key is not None and item is not None:
             self.cache_data[key] = item
 
     def get(self, key):
-        """ retrive item from cache by key
+        """
+        Return value linked to key.
+        If key is None or doesn't exist, return None
         """
         if key is None or key not in self.cache_data:
             return None
