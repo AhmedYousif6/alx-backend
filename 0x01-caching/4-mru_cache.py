@@ -1,48 +1,44 @@
 #!/usr/bin/env python3
-""" task 4 module
+""" BaseCaching module
 """
-
-
 from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
     """
-    cache system based on MRU algorithm
-    with two methods to store
-    and get data from the cache
+    FIFOCache defines a FIFO caching system
     """
+
     def __init__(self):
-        """ initialize
+        """
+        Initialize the class with the parent's init method
         """
         super().__init__()
-        self.order = []
+        self.usage = []
 
     def put(self, key, item):
         """
-        method to store data in the
-        cache system and return evicted
-        key if the cache need to make a room
+        Cache a key-value pair
         """
         if key is None or item is None:
-            return
-        if key in self.cache_data:
-            self.order.remove(key)
-        self.cache_data[key] = item
-        self.order.append(key)
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            mru = self.order.pop(-2)
-            del self.cache_data[mru]
-            print(f"Discard: {mru}")
+            pass
+        else:
+            length = len(self.cache_data)
+            if length >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+                print("DISCARD: {}".format(self.usage[-1]))
+                del self.cache_data[self.usage[-1]]
+                del self.usage[-1]
+            if key in self.usage:
+                del self.usage[self.usage.index(key)]
+            self.usage.append(key)
+            self.cache_data[key] = item
 
     def get(self, key):
         """
-        method to get the value
-        from the cache system with 
-        a given key
+        Return the value linked to a given key, or None
         """
-        if key is None or key not in self.cache_data:
-            return None
-        self.order.remove(key)
-        self.order.append(key)
-        return self.cache_data.get(key)
+        if key is not None and key in self.cache_data.keys():
+            del self.usage[self.usage.index(key)]
+            self.usage.append(key)
+            return self.cache_data[key]
+        return None

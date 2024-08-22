@@ -1,44 +1,42 @@
 #!/usr/bin/env python3
-""" task 2 module
+""" BaseCaching module
 """
-
-
 from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):
-    """ cache system based on LIFO algorithm
-    store data and
-    get data from the cache system
     """
+    FIFOCache defines a FIFO caching system
+    """
+
     def __init__(self):
         """
-        initialize base class and order list
+        Initialize the class with the parent's init method
         """
         super().__init__()
         self.order = []
 
     def put(self, key, item):
         """
-        store data into cache system,
-        using lifo to make room if the cache is full
+        Cache a key-value pair
         """
-        if key is not None and item is not None:
-            if key in self.cache_data:
-                self.order.remove(key)
-                self.order.append(key)
-                self.cache_data[key] = item
-            else:
-                if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                    last_in = self.order.pop()
-                    del self.cache_data[last_in]
-                    print(f"Discard: {last_in}")
-                self.order.append(key)
-                self.cache_data[key] = item
+        if key is None or item is None:
+            pass
+        else:
+            length = len(self.cache_data)
+            if length >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+                print("DISCARD: {}".format(self.order[-1]))
+                del self.cache_data[self.order[-1]]
+                del self.order[-1]
+            if key in self.order:
+                del self.order[self.order.index(key)]
+            self.order.append(key)
+            self.cache_data[key] = item
 
     def get(self, key):
         """
-        method to retrive the value,
-        with a given key
+        Return the value linked to a given key, or None
         """
-        return self.cache_data.get(key, None)
+        if key is not None and key in self.cache_data.keys():
+            return self.cache_data[key]
+        return None
