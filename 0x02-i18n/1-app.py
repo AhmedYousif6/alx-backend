@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ task 1 module
 """
-from flask import Flask
+from flask import Flask, render_template
 from flask_babel import Babel
 
 
