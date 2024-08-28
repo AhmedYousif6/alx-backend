@@ -8,8 +8,6 @@ from flask_babel import Babel
 
 class Config:
     '''Config class'''
-
-    DEBUG = True
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -38,8 +36,8 @@ def index() -> str:
     Returns:
         html: homepage
     '''
-    return render_template("3-index.html")
+    return render_template('3-index.html')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()
